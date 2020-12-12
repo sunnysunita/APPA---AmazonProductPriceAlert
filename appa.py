@@ -38,10 +38,11 @@ class APPA():
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36"}
         response = requests.get(self.__product_URL, headers=headers)
-        print(response.status_code)
+        #print(response.status_code)
         soup = BeautifulSoup(response.content, "html.parser")
         file = open("testproduct.html", "wb")
         file.write(soup.prettify("utf-8"))
+        file.close()
         title = soup.find("span", attrs={"id": "productTitle", "class": "a-size-large"}).string.strip()
         self.__product_title = title
         temp = soup.find_all("a", attrs={"class": "a-accordion-row a-declarative accordion-header"})[1]
@@ -107,9 +108,3 @@ class APPA():
             return False
 
 
-"""url = "https://www.amazon.in/ASUS-UX481FL-BM5811T-Graphics-ScreenPad-Celestial/dp/B083BSFNYR/ref=redir_mobile_desktop?ie=UTF8&aaxitk=fmsAJwTuLR14w2NCHZXPKw&hsa_cr_id=7122201800402&pd_rd_r=fada79e4-e809-4af3-9975-92c393acdc48&pd_rd_w=frVlY&pd_rd_wg=UoF8C&ref_=sbx_be_s_sparkle_mcd_asin_0_img"
-alert_price = 100000
-email_id = "sunnysunita59@gmail.com"
-laptop = APPA(url, alert_price, email_id)
-print(laptop.run())
-"""
